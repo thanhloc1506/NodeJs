@@ -37,9 +37,8 @@ function saveNote(fileName, notes){
 
 function checkNote(arrNote, newNote){
     for (const property in arrNote) {
-        //console.log(arrNote[`${property}`].title === newNote.title);
         if(arrNote[`${property}`].title === newNote.title && arrNote[`${property}`].description === newNote.description){
-            console.log('ok');
+            console.log('Note is exist');
             return false;
         }
       }
