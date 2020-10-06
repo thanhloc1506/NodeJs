@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-function writeContent(outputDir, filename, content) {
+const writeContent = (outputDir, filename, content) => {
   const filePath = outputDir + "/" + filename;
   fs.access(outputDir, function (error) {
     if (error) {
@@ -12,7 +12,7 @@ function writeContent(outputDir, filename, content) {
   });
 }
 
-function deleteContent(direc) {
+const deleteContent = (direc) => {
   if (fs.existsSync(direc)) {
     fs.unlinkSync(direc);
   } else {
@@ -20,7 +20,7 @@ function deleteContent(direc) {
   }
 }
 
-function load(fileName) {
+const load = (fileName) => {
   try {
     const nodtesJson = fs.readFileSync(fileName, { encoding: "utf-8" });
     return JSON.parse(nodtesJson);
@@ -29,12 +29,12 @@ function load(fileName) {
   }
 }
 
-function saveNote(fileName, notes) {
+const saveNote = (fileName, notes) => {
   const noteJson = JSON.stringify(notes);
   fs.writeFileSync(fileName, noteJson);
 }
 
-function checkNote(arrNote, newNote) {
+const checkNote = (arrNote, newNote) => {
   for (const property in arrNote) {
     if (arrNote[`${property}`].title == newNote.title) {
       console.log("Note is existed");
@@ -47,7 +47,7 @@ function checkNote(arrNote, newNote) {
 const findNoteByTittle = (noteTitle, notes) =>
   notes.find((notes) => notes.title === noteTitle);
 
-function removeNote(arrNote, title) {
+const removeNote = (arrNote, title) => {
   if (findNoteByTittle(title, arrNote)) {
     saveNote(
       "note.json",
@@ -55,6 +55,21 @@ function removeNote(arrNote, title) {
     );
   }
 }
+
+const getNote = (noteTitle, notes) => {
+  if (!findNoteByTittle(noteTitle, notes)) {
+    console.log(`${noteTitle} doesn't exist`);
+    return;
+  }
+  for (const property in notes) {
+    if (notes[`${property}`].title == noteTitle) {
+      console.log("Title: " + notes[`${property}`].title)
+      console.log("Description: " + notes[`${property}`].description)
+      break;
+    }
+  }
+} 
+
 
 module.exports = {
   writeContent,
@@ -64,4 +79,5 @@ module.exports = {
   checkNote,
   findNoteByTittle,
   removeNote,
+  getNote
 };
