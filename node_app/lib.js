@@ -1,55 +1,67 @@
 const fs = require("fs");
 
-function writeContent(outputDir, filename, content){
-    const filePath = outputDir + "/" + filename;
-    fs.access(outputDir, function(error){
-        if (error) {
-            fs.mkdirSync(outputDir);
-            fs.writeFileSync(filePath, content);
-        }
-        else {
-            fs.writeFileSync(filePath, content);
-        }
-    })
-}
-
-function deleteContent(direc){
-    if(fs.existsSync(direc)) {
-        fs.unlinkSync(direc);
+function writeContent(outputDir, filename, content) {
+  const filePath = outputDir + "/" + filename;
+  fs.access(outputDir, function (error) {
+    if (error) {
+      fs.mkdirSync(outputDir);
+      fs.writeFileSync(filePath, content);
     } else {
-        console.log('The file does not exist.');
+      fs.writeFileSync(filePath, content);
     }
+  });
 }
 
-function load(fileName){
-    try{
-        const nodtesJson = fs.readFileSync(fileName, {encoding: "utf-8"})
-        return JSON.parse(nodtesJson);
-    }catch (error){
-        return [];
+function deleteContent(direc) {
+  if (fs.existsSync(direc)) {
+    fs.unlinkSync(direc);
+  } else {
+    console.log("The file does not exist.");
+  }
+}
+
+function load(fileName) {
+  try {
+    const nodtesJson = fs.readFileSync(fileName, { encoding: "utf-8" });
+    return JSON.parse(nodtesJson);
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveNote(fileName, notes) {
+  const noteJson = JSON.stringify(notes);
+  fs.writeFileSync(fileName, noteJson);
+}
+
+function checkNote(arrNote, newNote) {
+  for (const property in arrNote) {
+    if (arrNote[`${property}`].title == newNote.title) {
+      console.log("Note is existed");
+      return false;
     }
+  }
+  return true;
 }
 
-function saveNote(fileName, notes){
-    const noteJson = JSON.stringify(notes);
-    fs.writeFileSync(fileName, noteJson);
-}
+const findNoteByTittle = (noteTitle, notes) =>
+  notes.find((notes) => notes.title === noteTitle);
 
-function checkNote(arrNote, newNote){
-    for (const property in arrNote) {
-        if(arrNote[`${property}`].title == newNote.title){
-            console.log('Note is existed');
-            return false;
-        }
-      }
-    return true;
+function removeNote(arrNote, title) {
+  if (findNoteByTittle(title, arrNote)) {
+    saveNote(
+      "note.json",
+      arrNote.filter((note) => note.title !== title)
+    );
+  }
 }
-
 
 module.exports = {
-    writeContent,
-    deleteContent,
-    load,
-    saveNote,
-    checkNote
-}
+  writeContent,
+  deleteContent,
+  load,
+  saveNote,
+  checkNote,
+  findNoteByTittle,
+  removeNote,
+};

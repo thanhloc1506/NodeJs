@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "chalk": "^4.1.0",
+    "module-alias": "^2.2.2",
     "validator": "^13.1.17",
     "yargs": "^16.0.3"
   },
