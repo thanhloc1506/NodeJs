@@ -6,6 +6,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "module-alias": "^2.2.2",
+    "request": "^2.81.0",
     "validator": "^13.1.17",
     "yargs": "^16.0.3"
   },
