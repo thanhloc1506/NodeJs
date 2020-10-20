@@ -10,7 +10,7 @@ const writeContent = (outputDir, filename, content) => {
       fs.writeFileSync(filePath, content);
     }
   });
-}
+};
 
 const deleteContent = (direc) => {
   if (fs.existsSync(direc)) {
@@ -18,7 +18,7 @@ const deleteContent = (direc) => {
   } else {
     console.log("The file does not exist.");
   }
-}
+};
 
 const load = (fileName) => {
   try {
@@ -27,12 +27,12 @@ const load = (fileName) => {
   } catch (error) {
     return [];
   }
-}
+};
 
 const saveNote = (fileName, notes) => {
   const noteJson = JSON.stringify(notes);
   fs.writeFileSync(fileName, noteJson);
-}
+};
 
 const checkNote = (arrNote, newNote) => {
   for (const property in arrNote) {
@@ -42,7 +42,7 @@ const checkNote = (arrNote, newNote) => {
     }
   }
   return true;
-}
+};
 
 const findNoteByTittle = (noteTitle, notes) =>
   notes.find((notes) => notes.title === noteTitle);
@@ -54,7 +54,7 @@ const removeNote = (arrNote, title) => {
       arrNote.filter((note) => note.title !== title)
     );
   }
-}
+};
 
 const getNote = (noteTitle, notes) => {
   if (!findNoteByTittle(noteTitle, notes)) {
@@ -63,13 +63,12 @@ const getNote = (noteTitle, notes) => {
   }
   for (const property in notes) {
     if (notes[`${property}`].title == noteTitle) {
-      console.log("Title: " + notes[`${property}`].title)
-      console.log("Description: " + notes[`${property}`].description)
+      console.log("Title: " + notes[`${property}`].title);
+      console.log("Description: " + notes[`${property}`].description);
       break;
     }
   }
-} 
-
+};
 
 module.exports = {
   writeContent,
@@ -79,5 +78,5 @@ module.exports = {
   checkNote,
   findNoteByTittle,
   removeNote,
-  getNote
+  getNote,
 };
