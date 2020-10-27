@@ -1,0 +1,8 @@
+<h1>Weather app</h1>
+<h2>{{location}}</h2>
+
+<ul style="list-style-type: none;">
+{{#each weather_date}}
+    <li style="background-color: beige; border-radius: 2px; padding-left: 20px;">{{@key}}: {{this}}</li>
+{{/each}}
+</ul>

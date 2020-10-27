@@ -1,0 +1,32 @@
+<h1>Weather app</h1>
+<form style="border: 2px solid blue; padding: 20px; border-radius: 20px; background-color: rgba( 135,206,250,0.3);">
+    <div style="display:inline-flex ">
+        <label style="margin: 10px; color: black;"> <b>City name</b></label>
+        <input type="text" name="searchText" placeholder="City name" value="{{searchText}}" style="border: 2px solid lightskyblue;">
+        <label for="date" style="margin: 10px; color: black; margin-left: 20px;"><b>Ngày</b></label>
+        <input type="date" name="date" value="{{date}}" style="border: 2px solid lightskyblue;">
+    </div>
+    <button type="submit" style="background-color:rgba( 135,206,250,0.8); margin-left: 30px;color: black;"><b>Search</b></button>
+</form>
+
+
+
+{{#if searchText}}
+{{#unless error}}
+<p">Searching locations for: {{searchText}}</p>
+{{/unless}}
+{{/if}}
+
+{{#if error}}
+{{#if searchText}}
+<p>Error: {{error}}</p>
+{{/if}}
+{{/if}}
+
+{{#if locations}}
+<ul style="list-style-type: none;">
+    {{#each locations}}
+    <li><a href="/{{this.title}}/forecast/{{this.woeid}}/{{this.date}}">{{this.title}}</a></li>
+    {{/each}}
+</ul>
+{{/if}}

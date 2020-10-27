@@ -1,14 +1,16 @@
 const request = require("request");
 const lib = require("./lib");
 const query = process.argv[3];
+
+
 lib.searchLocation(query, (error, location) => {
   if (error) {
     console.log(error);
     return;
   }
-  if (typeof (process.argv[3]) != "undefined") {
+  if (typeof (query) != "undefined") {
     lib.getLocationWeatherByDate(
-      { locationWoeid: location.woeid, date: process.argv[3] },
+      { locationWoeid: location.woeid, date: query },
       (error, weather) => {
         const day = process.argv[3].slice(0, 2);
         const month = process.argv[3].slice(3, 5);
@@ -28,7 +30,7 @@ lib.searchLocation(query, (error, location) => {
     );
   } else {
     lib.getLocationWeather(
-      { locationWoeid: location.woeid, date: process.argv[3] },
+      { locationWoeid: location.woeid, date: query },
       (error, weather) => {
         console.log(weather.applicable_date);
         console.log(
