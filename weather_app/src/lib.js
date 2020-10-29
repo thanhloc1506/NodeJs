@@ -23,7 +23,11 @@ const getLocationWeather = (locationWoeid, callback) => {
     { json: true },
     (err, res, body) => {
       const weather = body.consolidated_weather;
-      callback(null, weather);
+      if(body.detail == "Not found.")
+        err = true
+      else
+        err = null
+      callback(err, weather);
     }
   );
 };
@@ -36,6 +40,7 @@ const getLocationWeatherByDate = ({ locationWoeid, date }, callback) => {
       if (err) {
         return console.log(err);
       }
+      if(body.datail == "Not Found.")
       for (const i in body.consolidated_weather) {
         if (body.consolidated_weather[i].applicable_date == date) {
           const weather = body.consolidated_weather[i];

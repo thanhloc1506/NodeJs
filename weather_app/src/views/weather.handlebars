@@ -6,6 +6,8 @@
     {{#each this}}
     <li style="background-color: beige; border-radius: 2px; padding-left: 20px;">{{@key}}: {{this}}</li>
     {{/each}}
+    {{weather.applicable_date}}
+    <td><img src="https://www.metaweather.com//static/img/weather/{{this.weather_state_abbr}}.svg" alt="Icon" width="80" height="80"></td>
     </br>
     {{/each}}
 </ul>

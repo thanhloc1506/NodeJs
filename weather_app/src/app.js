@@ -7,7 +7,7 @@ const {
   getLocationWeather,
   getLocationWeatherByDate,
 } = require("./lib");
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
@@ -27,7 +27,11 @@ app.get("/", (req, res) => {
 app.get("/:city/forecast/:id", (req, res) => {
   const location = req.params.city;
   getLocationWeather(req.params.id, (error, weather) => {
-    res.render("weather", { location, weather, error });
+    if(error == true)
+      res.render("error", {})
+    else{
+      res.render("weather", { location, weather, error });
+    }
   });
 });
 
@@ -36,8 +40,10 @@ app.get("/:city/forecast/:id/:date", (req, res) => {
   getLocationWeatherByDate(
     { locationWoeid: req.params.id, date: req.params.date },
     (error, weather_date) => {
-      
-      res.render("weather_date", { date: req.params.date, location, weather_date, error });
+      if(error)
+        res.render("error", {})
+      else
+        res.render("weather_date", { date: req.params.date, location, weather_date, error });
     }
   );
 });
