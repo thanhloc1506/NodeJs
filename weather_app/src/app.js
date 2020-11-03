@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
     for(const i in locations){
       locations[i].date = date;
     }
+    console.log(locations)
     res.render("home", { date, searchText, locations, error });
   });
 });
@@ -30,6 +31,11 @@ app.get("/:city/forecast/:id", (req, res) => {
     if(error == true)
       res.render("error", {})
     else{
+      for(const i in weather){
+        weather[i].min_temp = Math.round(weather[i].min_temp * 100) / 100;
+        weather[i].max_temp = Math.round(weather[i].max_temp * 100) / 100;
+      }
+      
       res.render("weather", { location, weather, error });
     }
   });
@@ -43,6 +49,7 @@ app.get("/:city/forecast/:id/:date", (req, res) => {
       if(error)
         res.render("error", {})
       else
+        console.log(weather_date);
         res.render("weather_date", { date: req.params.date, location, weather_date, error });
     }
   );

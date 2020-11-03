@@ -1,9 +1,31 @@
 <h1>Weather app</h1>
 <h2>{{location}}</h2>
 
-<ul style="list-style-type: none;">
+{{!-- <ul style="list-style-type: none;">
 {{#each weather_date}}
     <li style="background-color: beige; border-radius: 2px; padding-left: 20px;">{{@key}}: {{this}}</li>
 {{/each}}
 <img src="https://www.metaweather.com//static/img/weather/{{weather_date.weather_state_abbr}}.svg" alt="Icon" width="80" height="80">
-</ul>
+</ul> --}}
+
+{{#if weather_date}}
+<br>
+<table>
+    <thead>
+        <tr>
+            <th>{{weather_date.applicable_date}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="https://www.metaweather.com//static/img/weather/{{weather_date.weather_state_abbr}}.svg" alt="Icon" width="80" height="80"></td>
+        </tr>
+        <tr>
+            <td>{{weather_date.weather_state_name}}</td>
+        </tr>
+        <tr>
+            <td>{{weather_date.min_temp}}°C - {{weather_date.max_temp}}°C</td>
+        </tr>
+    </tbody>
+</table>
+{{/if}}

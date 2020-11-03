@@ -40,7 +40,8 @@ const getLocationWeatherByDate = ({ locationWoeid, date }, callback) => {
       if (err) {
         return console.log(err);
       }
-      if(body.datail == "Not Found.")
+      if(body.detail == "Not found.")
+        err = true
       for (const i in body.consolidated_weather) {
         if (body.consolidated_weather[i].applicable_date == date) {
           const weather = body.consolidated_weather[i];

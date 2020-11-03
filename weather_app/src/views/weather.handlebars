@@ -1,6 +1,6 @@
 <h1>Weather app</h1>
 <h2>{{location}}</h2>
-{{#if weather }}
+{{!-- {{#if weather }}
 <ul style="list-style-type: none;">
     {{#each weather}}
     {{#each this}}
@@ -11,4 +11,33 @@
     </br>
     {{/each}}
 </ul>
+{{/if}} --}}
+{{#if weather}}
+<br>
+<table>
+    <thead>
+        <tr>
+            {{#each weather}}
+            <th>{{this.applicable_date}}</th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {{#each weather}}
+            <td><img src="https://www.metaweather.com//static/img/weather/{{this.weather_state_abbr}}.svg" alt="Icon" width="80" height="80"></td>
+            {{/each}}
+        </tr>
+        <tr>
+            {{#each weather}}
+            <td>{{this.weather_state_name}}</td>
+            {{/each}}
+        </tr>
+        <tr>
+            {{#each weather}}
+            <td>{{this.min_temp}}°C - {{this.max_temp}}°C</td>
+            {{/each}}
+        </tr>
+    </tbody>
+</table>
 {{/if}}
