@@ -1,0 +1,22 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Truong Thanh Loc",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thanhloc1506/NodeJs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thanhloc1506/NodeJs/issues"
+  },
+  "homepage": "https://github.com/thanhloc1506/NodeJs#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
