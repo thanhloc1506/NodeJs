@@ -42,14 +42,14 @@ function createModel(modelName) {
   }
 
   function updateEntity(currentTask, update) {
-    if (update.newTitle != undefined) currentTask.title = update.newTitle;
-    if (update.newBody != undefined) currentTask.body = update.newBody;
-    if (currentTask.completed == false && update.newCompleted == true)
+    if (update.title != undefined) currentTask.title = update.title;
+    if (update.body != undefined) currentTask.body = update.body;
+    if (currentTask.completed == false && update.completed == true)
       currentTask.completedAt = new Date();
-    if (currentTask.completed == true && update.newCompleted == false)
+    if (currentTask.completed == true && update.completed == false)
       currentTask.completedAt = null;
-    if (update.newCompleted != undefined)
-      currentTask.completed = update.newCompleted;
+    if (update.completed != undefined)
+      currentTask.completed = update.completed;
     const allEntities = getAllEntities();
     for (const i in allEntities) {
       if (allEntities[i].id == currentTask.id) {
