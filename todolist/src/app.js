@@ -33,8 +33,8 @@ app.get("/tasks/:taskId", (req, res) => {
 });
 
 app.patch("/tasks/:taskId", (req, res) => {
-  const { newTitle, newBody, newCompleted } = req.body;
-  const update = { newTitle, newBody, newCompleted };
+  const { title, body, completed } = req.body;
+  const update = { title, body, completed };
   console.log(update);
   const currentIdTask = req.params.taskId;
   const _updateTask = updateTask(currentIdTask, update);
