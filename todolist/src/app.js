@@ -32,7 +32,7 @@ app.post("/tasks", (req, res) => {
   }
 });
 
-app.get((req, res) => {
+app.get("/tasks", (req, res) => {
   getAllTasks((err, tasks) => {
       res.json(tasks);
   });
