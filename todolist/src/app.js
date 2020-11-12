@@ -9,7 +9,14 @@ const {
   deleteTask,
 } = require("./services/task-service");
 const port = process.env.PORT || 3000;
-
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/todolist-app', {useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log("connected successfully")
+});
 app.use(express.json());
 
 app.post("/tasks", (req, res) => {
@@ -18,13 +25,17 @@ app.post("/tasks", (req, res) => {
   if (createdTask.title == undefined)
     res.status(400).json({message: "title is required"});
   else {
-    createTask(createdTask);
-    res.json(createdTask);
+    createTask(createdTask, (createdTask) => {
+      res.json(createdTask);
+    });
+    
   }
 });
 
-app.get("/tasks", (req, res) => {
-  res.json(getAllTasks());
+app.get((req, res) => {
+  getAllTasks((err, tasks) => {
+      res.json(tasks);
+  });
 });
 
 app.get("/tasks/:taskId", (req, res) => {
