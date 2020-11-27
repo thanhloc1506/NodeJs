@@ -15,8 +15,10 @@
     "url": "https://github.com/thanhloc1506/NodeJs/issues"
   },
   "homepage": "https://github.com/thanhloc1506/NodeJs#readme",
-  "description": "",
+  "description": "- [ ] nhắc việc\r - [ ] List tasks",
   "dependencies": {
-    "express": "^4.17.1"
-  }
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {}
 }
